@@ -14,7 +14,7 @@ class UserController extends Controller
         if (Auth::check()) {
             return redirect()->route('dashboard');
         } else {
-            return view('access');
+            return view('access/layout');
         }
     }
 
@@ -32,15 +32,12 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended(route('dashboard'))->with('success', 'Authenticate Sucessfully!');
         }
 
-        $notification = [
-            'message' => 'Incorrect Credentials',
-            'alert-type' => 'danger'
-        ];
+        
 
-        return back()->with($notification);
+        return back()->with('error', 'Incorrect Credentials!');
     }
 
     public function proceedLogout(Request $request)
@@ -48,6 +45,6 @@ class UserController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('access');
+        return redirect()->route('access')->with('success', 'Logout Sucessfully!');;
     }
 }
