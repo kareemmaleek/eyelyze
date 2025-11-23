@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'is_admin' => 1,
+            'role' => 0,
         ]);
     }
 }
