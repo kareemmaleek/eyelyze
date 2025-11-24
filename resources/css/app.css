@@ -5,6 +5,12 @@
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
+:root {
+    --mainColor: #bbf451;
+    --textColor: #1b1b1b;
+    --bgColor: #f8ffe3;
+}
+
 body {
     font-family: "Inter", sans-serif;
     font-optical-sizing: auto;
@@ -12,11 +18,26 @@ body {
     content: "ec8f";
 }
 
-.toast-ease {
-    animation: slideInEaseIn 0.1s ease-in;
+.slidePopup {
+    animation: slidePopup 0.4s ease-in-out forwards;
 }
 
-@keyframes slideInEaseIn {
+@keyframes slidePopup {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-ease {
+    animation: easeIn 0.1s ease-in;
+}
+
+@keyframes easeIn {
     from {
         transform: translateY(0);
         opacity: 0;

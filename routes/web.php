@@ -14,12 +14,16 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('track')->group(function() {
         Route::get('/', [TrackingController::class, 'index'])->name('track');
     });
+
+    Route::prefix('users')->group(function(){
+        Route::get('/', [UserController::class, 'indexUsers'])->name('users');
+    });
     
 });
 
 
 Route::prefix('access')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('access');
+    Route::get('/', [UserController::class, 'indexAccess'])->name('access');
     Route::post('/', [UserController::class, 'proceedLogin'])->name('proceed_login');
     Route::post('/logout', [UserController::class, 'proceedLogout'])->name('proceed_logout');
 });

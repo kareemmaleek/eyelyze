@@ -13,13 +13,13 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="bg-[#f8ffe3] text-gray-800 m-0 p-0 overflow-x-hidden">
+<body class="bg-[var(--bgColor)] text-[var(--textColor)] m-0 p-0 overflow-x-hidden">
 
     <div class="w-full h-dvh flex">
 
         @include('components._messageFlash');
 
-        <div class="relative w-56 h-full bg-white shadow-md">
+        <div class="relative w-56 h-full bg-white">
             <x-dashboard.headerLogo />
 
             <x-dashboard.navigation />
@@ -28,11 +28,11 @@
                 Copyright &copy; 2025, by <a href="https://nornetics.com" target="_blank" class="hover:text-lime-400 hover:underline cursor-pointer">Nornetics</a>
             </div>
         </div>
-        <div class="flex-1 h-full">
+        <div class="flex-1 h-full flex flex-col">
 
             <x-dashboard.header />
 
-            <main>
+            <main class="w-full h-full">
 
                 {{-- MAIN CONTENT HERE --}}
 

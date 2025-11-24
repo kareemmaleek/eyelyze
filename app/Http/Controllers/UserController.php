@@ -9,12 +9,20 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
 
-    public function index()
+    public function indexUsers(){
+        if (Auth::check()) {
+            return view('dashboard.users');
+        } else {
+            return redirect()->route('access.layout');
+        }
+    }
+
+    public function indexAccess()
     {
         if (Auth::check()) {
             return redirect()->route('dashboard');
         } else {
-            return view('access/layout');
+            return view('access.layout');
         }
     }
 
