@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(AdminSeeder::class);
 
-        User::factory()->create([
+        User::factory(1000)->create([
             'role' => 0,
         ]);
     }

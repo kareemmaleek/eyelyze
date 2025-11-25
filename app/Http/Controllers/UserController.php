@@ -4,13 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
 
-    public function indexUsers(){
+    public function indexUsers(Request $request){
         if (Auth::check()) {
+
+            // dd($request->ajax());
+
+            if($request->ajax()){
+                $users = User::query();
+
+                // dd($users);
+
+                return DataTables::eloquent($users)->addColumn('created_at', function($user) {
+                    return Carbon::parse($user->created_at)->format("d-m-Y h:i A");
+                })->make(true);
+            }
+        
             return view('dashboard.users');
         } else {
             return redirect()->route('access.layout');

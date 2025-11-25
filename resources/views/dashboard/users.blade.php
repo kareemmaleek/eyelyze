@@ -19,8 +19,26 @@
             
         </div>
 
-        <div class="w-full h-full rounded-lg bg-white">
+        <div class="w-full h-full rounded-lg bg-white p-5">
+                <table class="w-full table table-auto data-table">
+                        <thead>
+                            <tr class="text-left">
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{-- @foreach ($data as $user)
+                                <tr>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                </tr>
+                            @endforeach --}}
+                        </tbody>
+                </table>
 
+                
         </div>
     </div>
 </x-dashboard.layout>

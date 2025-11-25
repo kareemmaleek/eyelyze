@@ -9,10 +9,10 @@
         <form action="" method="POST">
             @csrf 
             <label for="email" class="text-[10px] font-semibold uppercase tracking-widest py-1">email address</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full outline-none focus:ring-2 p-2 px-5 text-sm font-medium ring ring-lime-200 rounded-lg" placeholder="johndoe@ex.com">
+            <input type="email" name="email" id="email" value="{{ old('email') }}" class="w-full outline-none focus:ring-2 focus:ring-lime-100 p-2 px-5 text-sm font-medium ring ring-gray-300 rounded-lg" placeholder="johndoe@ex.com">
 
             <label for="password" class="text-[10px] font-semibold uppercase tracking-widest py-1">password</label>
-            <input type="password" name="password" id="password" class="w-full outline-none focus:ring-2 p-2 px-5 text-sm font-medium ring ring-lime-200 rounded-lg" placeholder="******">
+            <input type="password" name="password" id="password" class="w-full outline-none focus:ring-2 focus:ring-lime-100 p-2 px-5 text-sm font-medium ring ring-gray-300 rounded-lg" placeholder="******">
 
             <div class="w-full h-fit my-3 flex justify-between items-center">
                 <button type="submit" class="p-2  px-10 w-fit text-white font-medium shadow-md bg-linear-45 from-[#DCE35B] to-[#45B649] rounded-lg cursor-pointer hover:to-[#DCE35B] hover:from-[#45B649] transition ease-in">Log In</button>

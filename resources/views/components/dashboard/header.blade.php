@@ -10,12 +10,12 @@
     </div>
 
     <div x-show="open" @click.away="open = false" x-transition class="absolute -bottom-20 right-5 z-50 w-38 h-fit bg-white rounded-lg p-2 shadow-lg">
-        <div class="w-full h-fit text-sm p-2 hover:bg-lime-100 cursor-pointer rounded-lg flex gap-2 items-center">
-            <x-heroicon-o-user-circle class="w-5 h-5 text-lime-600"/>
+        <div class="w-full h-fit text-sm p-2 hover:bg-lime-50 cursor-pointer rounded-lg flex gap-2 items-center">
+            <x-heroicon-o-user-circle class="w-5 h-5"/>
             Profile
         </div>
-        <div @click="document.getElementById('logout').submit()" class="w-full h-fit text-sm p-2 hover:bg-lime-100 cursor-pointer rounded-lg flex gap-2 items-center">
-            <x-heroicon-o-arrow-right-end-on-rectangle class="w-5 h-5 text-lime-600"/>
+        <div @click="document.getElementById('logout').submit()" class="w-full h-fit text-sm p-2 hover:bg-lime-50 cursor-pointer rounded-lg flex gap-2 items-center">
+            <x-heroicon-o-arrow-right-end-on-rectangle class="w-5 h-5 "/>
             Logout
         </div>
     </div>
