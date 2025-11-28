@@ -11,22 +11,23 @@ use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
 
-    public function indexUsers(Request $request){
+    public function indexUsers(Request $request)
+    {
         if (Auth::check()) {
 
             // dd($request->ajax());
 
-            if($request->ajax()){
-                $users = User::query();
+            // if($request->ajax()){
+            //     $users = User::query();
 
-                // dd($users);
+            //     // dd($users);
 
-                return DataTables::eloquent($users)->addColumn('created_at', function($user) {
-                    return Carbon::parse($user->created_at)->format("d-m-Y h:i A");
-                })->make(true);
-            }
-        
-            return view('dashboard.users');
+            //     return DataTables::eloquent($users)->addColumn('created_at', function($user) {
+            //         return Carbon::parse($user->created_at)->format("d-m-Y h:i A");
+            //     })->make(true);
+            // }
+
+            return view('dashboard.users', ['data' => User::latest()->paginate(20)]);
         } else {
             return redirect()->route('access.layout');
         }
@@ -58,7 +59,7 @@ class UserController extends Controller
             return redirect()->intended(route('dashboard'))->with('success', 'Authenticate Sucessfully!');
         }
 
-        
+
 
         return back()->with('error', 'Incorrect Credentials!');
     }

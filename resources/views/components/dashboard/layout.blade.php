@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +10,19 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css" />
-    
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css" />s --}}
+    {{-- <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.tailwindcss.css" /> --}}
+
+
+
+
     <title>Eyelyze - Dashboard</title>
-    
+
 </head>
+
 <body class="bg-[var(--bgColor)] text-[var(--textColor)] m-0 p-0 overflow-x-hidden">
 
     <div class="w-full h-dvh flex">
@@ -28,7 +35,8 @@
             <x-dashboard.navigation />
 
             <div class="absolute bottom-5 left-2 w-full h-fit text-[10px] text-gray-400">
-                Copyright &copy; 2025, by <a href="https://nornetics.com" target="_blank" class="hover:text-lime-400 hover:underline cursor-pointer">Nornetics</a>
+                Copyright &copy; 2025, by <a href="https://nornetics.com" target="_blank"
+                    class="hover:text-lime-400 hover:underline cursor-pointer">Nornetics</a>
             </div>
         </div>
         <div class="flex-1 h-full flex flex-col">
@@ -42,30 +50,32 @@
                 {{ $slot }}
 
             </main>
-            
+
         </div>
     </div>
-    
+
 
     <script type="text/javascript">
         function showToast(message) {
-        const t = document.getElementById('toast');
+            const t = document.getElementById('toast');
 
-        t.classList.remove('hidden');
+            t.classList.remove('hidden');
 
-        setTimeout(() => {
-            t.classList.add('hidden');
-        }, 2000);
-}
+            setTimeout(() => {
+                t.classList.add('hidden');
+            }, 2000);
+        }
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script> --}}
+    {{-- <script src="https://cdn.datatables.net/2.3.5/js/dataTables.tailwindcss.js"></script> --}}
+
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
             $(".data-table").DataTable({
                 serverSide: true,
                 processing: true,
@@ -76,14 +86,23 @@
                         'X-Requested-With': 'XMLHttpRequest'
                     }
                 },
-                columns: [
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'created_at', name: 'created_at'}
+                columns: [{
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    }
                 ]
-                
+
             });
         });
-    </script>
+    </script> --}}
 </body>
+
 </html>
