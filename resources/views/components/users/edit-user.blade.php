@@ -1,20 +1,27 @@
-<x-slidePopup show="createOpen" title="Add New User">
-    <form action="{{ route('users') }}" method="POST">
+<x-slidePopup show="editOpen" title="Edit User">
+    <form :action="'/users/edit/' + editData.id" method="POST">
         @csrf
+        @method('PUT')
         
-        <p class="text-sm font-light py-4">Create a new user account.</p>
+        <p class="text-sm font-light py-4">Update user information.</p>
 
         <label for="email" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
             <span class="text-red-400">*</span>email address
         </label>
-        <input type="email" name="email" value="{{ old('email') }}" required
-               class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-4 text-sm font-medium ring ring-white rounded-md" 
+        <input type="email" 
+               name="email" 
+               x-model="editData.email" 
+               required
+               class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-3 text-sm font-medium ring ring-white rounded-md" 
                placeholder="johndoe@ex.com">
 
         <label for="username" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
             <span class="text-red-400">*</span>username
         </label>
-        <input type="text" name="username" value="{{ old('username') }}" required
+        <input type="text" 
+               name="username" 
+               x-model="editData.username" 
+               required
                class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-3 text-sm font-medium ring ring-white rounded-md" 
                placeholder="johndoe33">
 
@@ -22,32 +29,36 @@
             <label for="role" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
                 <span class="text-red-400">*</span>Role
             </label>
-            <select name="role" required
+            <select name="role" 
+                    x-model="editData.role"
+                    required
                     class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-3 text-sm font-medium ring ring-white rounded-md">
-                <option disabled selected>Please select account role...</option>
+                <option disabled>Please select account role...</option>
                 <option value="1" class="text-black">Administrator</option>
                 <option value="0" class="text-black">User</option>
             </select>
         @endif
 
         <label for="password" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
-            <span class="text-red-400">*</span>password
+            new password (optional)
         </label>
-        <input type="password" name="password" required
+        <input type="password" 
+               name="password"
                class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-3 text-sm font-medium ring ring-white rounded-md" 
-               placeholder="******">
+               placeholder="Leave blank to keep current">
 
         <label for="password_confirmation" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
-            <span class="text-red-400">*</span>confirm password
+            confirm new password
         </label>
-        <input type="password" name="password_confirmation" required
+        <input type="password" 
+               name="password_confirmation"
                class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-3 text-sm font-medium ring ring-white rounded-md" 
                placeholder="******">
 
         <button type="submit"
                 class="w-full p-1 px-3 my-3 flex justify-center items-center gap-1 rounded-md text-sm text-black bg-[var(--mainColor)] hover:opacity-90 transition ease-in cursor-pointer">
             <x-heroicon-o-user class="w-4 h-4"/>
-            Add User
+            Update User
         </button>
     </form>
 </x-slidePopup>

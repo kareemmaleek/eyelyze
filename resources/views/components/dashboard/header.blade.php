@@ -1,6 +1,6 @@
 <div x-data="{ open: false }" class="relative w-full h-14 bg-white flex p-1 px-10 justify-end items-center">
     <div @click="open = !open" class="w-fit h-full flex gap-2 items-center cursor-pointer">
-        <img src="https://picsum.photos/100" alt="" class="w-10 h-10 rounded-full">
+        <img src="#" alt="" class="w-10 h-10 rounded-full">
         <div class="w-fit h-full flex flex-col justify-center">
             <div class="text-xs text-gray-400">Welcome,</div>
             <div class="text-xs text-transparent bg-clip-text bg-linear-to-tr from-[#DCE35B] to-[#45B649] font-medium">{{ Auth::user()->name }}</div>

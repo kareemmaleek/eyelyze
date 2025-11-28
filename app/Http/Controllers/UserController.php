@@ -27,7 +27,7 @@ class UserController extends Controller
             //     })->make(true);
             // }
 
-            return view('dashboard.users', ['data' => User::latest()->paginate(20)]);
+            return view('dashboard.users', ['data' => User::latest()->paginate(15)]);
         } else {
             return redirect()->route('access.layout');
         }

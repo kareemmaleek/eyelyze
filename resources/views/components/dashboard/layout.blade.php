@@ -29,7 +29,7 @@
 
         @include('components._messageFlash');
 
-        <div class="relative w-56 h-full bg-white">
+        <div class=" w-56 h-full bg-white sticky top-0">
             <x-dashboard.headerLogo />
 
             <x-dashboard.navigation />
@@ -39,11 +39,11 @@
                     class="hover:text-lime-400 hover:underline cursor-pointer">Nornetics</a>
             </div>
         </div>
-        <div class="flex-1 h-full flex flex-col">
+        <div class="flex-1 h-dvh flex flex-col">
 
             <x-dashboard.header />
 
-            <main class="w-full h-full">
+            <main class="flex-1 overflow-hidden">
 
                 {{-- MAIN CONTENT HERE --}}
 
@@ -74,35 +74,28 @@
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $(".data-table").DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ route('users') }}",
-                    type: 'GET',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                },
-                columns: [{
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'email',
-                        name: 'email'
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    }
-                ]
-
-            });
+    <script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('slidePopup', {
+            active: null,
+            data: {},
+            
+            open(identifier, data = {}) {
+                this.active = identifier;
+                this.data = data;
+            },
+            
+            close() {
+                this.active = null;
+                this.data = {};
+            },
+            
+            isOpen(identifier) {
+                return this.active === identifier;
+            }
         });
-    </script> --}}
+    });
+</script>
 </body>
 
 </html>
