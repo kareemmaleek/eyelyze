@@ -1,8 +1,15 @@
 <x-slidePopup show="createOpen" title="Add New User">
-    <form action="{{ route('users') }}" method="POST">
+    <form action="{{ route('users.post') }}" method="POST">
         @csrf
         
         <p class="text-sm font-light py-4">Create a new user account.</p>
+
+        <label for="fullname" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
+            <span class="text-red-400">*</span>fullname
+        </label>
+        <input type="text" name="fullname" value="{{ old('fullname') }}" required
+               class="w-full outline-none focus:ring-2 focus:ring-lime-100 my-2 p-1 px-3 text-sm font-medium ring ring-white rounded-md" 
+               placeholder="John Doe">
 
         <label for="email" class="text-[10px] text-lime-100 font-semibold uppercase tracking-widest">
             <span class="text-red-400">*</span>email address

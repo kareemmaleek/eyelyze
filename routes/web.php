@@ -17,6 +17,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('users')->group(function(){
         Route::get('/', [UserController::class, 'indexUsers'])->name('users');
+        Route::post('/', [UserController::class, 'createUser'])->name('users.post');
+        Route::put('/{uid}', [UserController::class, 'updateUser']);
     });
     
 });

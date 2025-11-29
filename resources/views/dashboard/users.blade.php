@@ -1,93 +1,97 @@
 <x-dashboard.layout>
-    <div x-data="{
-        createOpen: false, 
-        editOpen: false, 
-        editData: {
-            id: null,
-            name: '',
-            username: '',
-            email: '',
-            role: 0
-        },
-        openCreate() {
-            this.createOpen = true;
-            this.editOpen = false;  // Tutup edit jika buka create
-        },
-        openEdit(user) {
-            this.editData = {
-                id: user.id,
-                name: user.name,
-                username: user.username,
-                email: user.email,
-                role: user.role
-            };
-            this.editOpen = true;
-            this.createOpen = false;  // Tutup create jika buka edit
-        }
-    }" class="h-full flex flex-col p-5 pt-8">
-        
-        <div class="w-full h-fit flex justify-between mb-5 shrink-0">
+    <div
+        x-data="{
+            createOpen: false,
+            editOpen: false,
+            editData: {
+                uid: '',
+                name: '',
+                username: '',
+                email: '',
+                role: 0,
+            },
+            openCreate() {
+                this.createOpen = true
+                this.editOpen = false // Tutup edit jika buka create
+            },
+            openEdit(user) {
+                this.editData = {
+                    uid: user.uid,
+                    name: user.name,
+                    username: user.username,
+                    email: user.email,
+                    role: user.role,
+                }
+                this.editOpen = true
+                this.createOpen = false // Tutup create jika buka edit
+            },
+        }"
+        class="flex h-full flex-col p-5"
+    >
+        <div class="mb-5 flex h-fit w-full shrink-0 justify-between">
             <div class="w-fit">
                 <h2 class="text-3xl font-medium">Users</h2>
             </div>
 
             <div class="w-fit">
-                <button @click="openCreate()"
-                    class="w-fit p-2 px-5 flex items-center gap-1 rounded-md text-sm bg-[var(--mainColor)] hover:opacity-90 transition ease-in cursor-pointer">
-                    <x-heroicon-o-user class="w-4 h-4" />
+                <button
+                    @click="openCreate()"
+                    class="flex w-fit cursor-pointer items-center gap-1 rounded-md bg-[var(--mainColor)] p-2 px-5 text-sm transition ease-in hover:opacity-90"
+                >
+                    <x-heroicon-o-user class="h-4 w-4" />
                     Add User
                 </button>
             </div>
         </div>
 
-        <div class="w-full flex-1 rounded-lg bg-white p-5 flex flex-col overflow-auto">
-
-            <div class="flex-1 relative w-full rounded-lg border overflow-auto mb-3">
-
-                 <table class="w-full text-sm text-left">
-                    <thead class="text-sm text-body bg-lime-100 border-b sticky top-0 z-10">
+        <div class="flex w-full flex-1 flex-col overflow-auto rounded-lg bg-white p-5">
+            <div class="relative mb-3 w-full flex-1 overflow-auto rounded-lg border">
+                <table class="w-full text-left text-sm">
+                    <thead class="text-body sticky top-0 z-10 border-b bg-lime-100 text-sm">
                         <tr>
-                            <th scope="col" class="px-6 py-2 font-medium bg-lime-100">Full Name</th>
-                            <th scope="col" class="px-6 py-2 font-medium bg-lime-100">Username</th>
-                            <th scope="col" class="px-6 py-2 font-medium bg-lime-100">Email</th>
-                            <th scope="col" class="px-6 py-2 font-medium bg-lime-100">Created At</th>
+                            <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">Full Name</th>
+                            <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">Username</th>
+                            <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">Email</th>
+                            <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">Created At</th>
                             @if (Auth::user()->role === 1)
-                                <th scope="col" class="px-6 py-2 font-medium bg-lime-100">Action</th>
+                                <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">Action</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($data as $user)
-                        <tr class="bg-white border-b hover:bg-gray-100">
-                            <th scope="row" class="px-6 py-2 font-medium whitespace-nowrap">
-                                {{ $user->name }}
-                            </th>
-                            <td class="px-6 py-2">{{ $user->username }}</td>
-                            <td class="px-6 py-2">{{ $user->email }}</td>
-                            <td class="px-6 py-2">{{ $user->created_at }}</td>
-                            @if (Auth::user()->role === 1)
-                                <td class="px-6 py-2">
-                                    <button @click="openEdit({
-                                        id: {{ $user->id }},
+                            <tr class="border-b bg-white hover:bg-gray-100">
+                                <th scope="row" class="px-6 py-2 font-medium whitespace-nowrap">
+                                    {{ $user->name }}
+                                </th>
+                                <td class="px-6 py-2">{{ $user->username }}</td>
+                                <td class="px-6 py-2">{{ $user->email }}</td>
+                                <td class="px-6 py-2">{{ $user->created_at->format('d M Y, H:i A') }}</td>
+                                @if (Auth::user()->role === 1)
+                                    <td class="px-6 py-2">
+                                        <button
+                                            @click="openEdit({
+
+                                        uid: '{{ $user->uid }}',
                                         name: '{{ addslashes($user->name) }}',
                                         username: '{{ $user->username }}',
                                         email: '{{ $user->email }}',
                                         role: {{ $user->role }}
-                                    })" 
-                                    class="px-3 py-2 rounded-md text-xs bg-[var(--mainColor)] cursor-pointer hover:opacity-90">
-                                        Edit
-                                    </button>
-                                </td>
-                            @endif
-                        </tr>
+                                    })"
+                                            class="cursor-pointer rounded-md bg-[var(--mainColor)] px-3 py-2 text-xs hover:opacity-90"
+                                        >
+                                            Edit
+                                        </button>
+                                    </td>
+                                @endif
+                            </tr>
                         @endforeach
                     </tbody>
-                 </table>
+                </table>
             </div>
 
             {{ $data->onEachSide(1)->links() }}
         </div>
-       
 
         <!-- Modals - PENTING: Tanpa wrapper div tambahan -->
         <x-users.add-user />

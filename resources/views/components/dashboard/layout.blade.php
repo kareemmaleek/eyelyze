@@ -24,10 +24,11 @@
 </head>
 
 <body class="bg-[var(--bgColor)] text-[var(--textColor)] m-0 p-0 overflow-x-hidden">
+    @include('components._messageFlash')
 
     <div class="w-full h-dvh flex">
 
-        @include('components._messageFlash');
+        
 
         <div class=" w-56 h-full bg-white sticky top-0">
             <x-dashboard.headerLogo />
@@ -55,7 +56,7 @@
     </div>
 
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function showToast(message) {
             const t = document.getElementById('toast');
 
@@ -65,7 +66,7 @@
                 t.classList.add('hidden');
             }, 2000);
         }
-    </script>
+    </script> --}}
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
