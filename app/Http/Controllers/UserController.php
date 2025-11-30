@@ -13,6 +13,7 @@ use Yajra\DataTables\Facades\DataTables;
 class UserController extends Controller
 {
 
+
     public function indexUsers(Request $request)
     {
         if (Auth::check()) {
@@ -32,7 +33,7 @@ class UserController extends Controller
         }
     }
 
-    public function createUser(Request $req){
+    public function createUser(Request $req, AuditController $log){
 
 
         if (!Auth::check()) {
@@ -63,13 +64,15 @@ class UserController extends Controller
            ]);
 
 
+           $log->createLog('created user with email ' . $req->email, $req->path(), $req->method(), $req->ip());
+
            return redirect()->route('users')
         ->with('success', 'Created new user successfully!');
 
         
     }
 
-    public function updateUser(Request $req, $uid){
+    public function updateUser(Request $req, $uid, AuditController $log){
         if(!Auth::check()){
             return view('access.layout');
         }
@@ -105,7 +108,9 @@ class UserController extends Controller
             $user->role = $req->role;
         }
 
+        
         $user->save();
+        $log->createLog('edited user with email ' . $user->email, $req->path(), $req->method(), $req->ip());
 
         return redirect()->route('users')->with('success', 'Update user data successfully!');
 

@@ -30,7 +30,7 @@
     >
         <div class="mb-5 flex h-fit w-full shrink-0 justify-between">
             <div class="w-fit">
-                <h2 class="text-3xl font-medium">Users</h2>
+                <h2 class="text-2xl font-medium">Users</h2>
             </div>
 
             <div class="w-fit">

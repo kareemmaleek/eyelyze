@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\TrackingController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuditController;
+use App\Http\Controllers\TrackingController;
 
 
 Route::middleware(['auth'])->group(function () {
@@ -19,6 +20,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/', [UserController::class, 'indexUsers'])->name('users');
         Route::post('/', [UserController::class, 'createUser'])->name('users.post');
         Route::put('/{uid}', [UserController::class, 'updateUser']);
+    });
+
+    Route::prefix('audit')->group(function() {
+        Route::get('/', [AuditController::class, 'index'])->name('audit');
     });
     
 });
