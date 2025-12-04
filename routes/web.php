@@ -4,6 +4,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuditController;
+use App\Http\Controllers\DevicesController;
 use App\Http\Controllers\TrackingController;
 
 
@@ -14,6 +15,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('track')->group(function() {
         Route::get('/', [TrackingController::class, 'index'])->name('track');
+    });
+
+    Route::prefix('devices')->group(function () {
+        Route::get('/', [DevicesController::class, 'indexDevices'])->name('devices');
     });
 
     Route::prefix('users')->group(function(){

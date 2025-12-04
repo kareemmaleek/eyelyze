@@ -21,6 +21,12 @@ class UserController extends Controller
 
             $query = User::query();
 
+            if($request->get('search')){
+                $query->where(function ($q) use ($request) {
+                    $q->where('name', 'like', '%'.$request->search.'%')->orWhere('email', 'like', '%' . $request->search . '%')->orWhere('username', 'like', '%'. $request->search .'%');
+                });
+            }
+
             $sortBy     = $request->get('sortBy', 'id');
             $sortDir    = $request->get('sortDir', 'desc');
 

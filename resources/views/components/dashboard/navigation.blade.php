@@ -22,7 +22,7 @@
         <span class="text-[10px] font-bold tracking-wider text-gray-400 uppercase">management</span>
     </div>
 
-    <x-dashboard.nav-link href="/report" :active="request()->is('devices')">
+    <x-dashboard.nav-link href="/devices" :active="request()->is('devices')">
         <x-heroicon-o-signal class="h-6 w-6" />
         <span class="text-sm font-medium">Devices</span>
     </x-dashboard.nav-link>

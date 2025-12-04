@@ -45,47 +45,83 @@
         </div>
 
         <div class="flex w-full flex-1 flex-col overflow-auto rounded-lg bg-white p-5">
+            <div class="w-fit pb-4">
+                <form
+                    method="GET"
+                    action=""
+                    x-data="{ q: '{{ request('search') }}', timeout: null }"
+                    x-init="
+                        $watch('q', (value) => {
+                            clearTimeout(timeout)
+                            timeout = setTimeout(() => $el.submit(), 800)
+                        })
+                    "
+                >
+                    <input
+                        type="text"
+                        name="search"
+                        x-model="q"
+                        placeholder="Search..."
+                        class="w-[200px] rounded-lg p-2 px-4 text-sm ring ring-black outline-0 outline-none focus:outline-0"
+                    />
+                </form>
+            </div>
             <div class="relative mb-3 w-full flex-1 overflow-auto rounded-lg border">
                 <table class="w-full text-left text-sm">
                     <thead class="text-body sticky top-0 z-10 border-b bg-lime-100 text-sm">
                         <tr>
                             <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">
-                                <a href="{{ route('users', [
-                                    'sortBy' => 'name',
-                                    'sortDir' => ($sortBy === 'name' && $sortDir === 'desc') ? 'asc' : 'desc'
-                                ]) }}" class="flex gap-2 items-center hover:underline-offset-2 hover:underline">
+                                <a
+                                    href="{{
+                                        route('users', [
+                                            'sortBy' => 'name',
+                                            'sortDir' => $sortBy === 'name' && $sortDir === 'desc' ? 'asc' : 'desc',
+                                        ])
+                                    }}"
+                                    class="flex items-center gap-2 hover:underline hover:underline-offset-2"
+                                >
                                     Full Name
-                                    @if($sortBy == 'name' && $sortDir == 'asc')
-                                        <x-heroicon-s-chevron-up class='w-3 h-3'/>
-                                        @else
-                                        <x-heroicon-s-chevron-down class='w-3 h-3'/>
+                                    @if ($sortBy == 'name' && $sortDir == 'asc')
+                                        <x-heroicon-s-chevron-up class="h-3 w-3" />
+                                    @else
+                                        <x-heroicon-s-chevron-down class="h-3 w-3" />
                                     @endif
                                 </a>
                             </th>
                             <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">Username</th>
                             <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">
-                                <a href="{{ route('users', [
-                                    'sortBy' => 'email',
-                                    'sortDir' => ($sortBy === 'email' && $sortDir === 'desc') ? 'asc' : 'desc'
-                                ]) }}" class="flex gap-2 items-center hover:underline-offset-2 hover:underline">
+                                <a
+                                    href="{{
+                                        route('users', [
+                                            'sortBy' => 'email',
+                                            'sortDir' => $sortBy === 'email' && $sortDir === 'desc' ? 'asc' : 'desc',
+                                        ])
+                                    }}"
+                                    class="flex items-center gap-2 hover:underline hover:underline-offset-2"
+                                >
                                     Email
-                                    @if($sortBy == 'email' && $sortDir == 'asc')
-                                        <x-heroicon-s-chevron-up class='w-3 h-3'/>
-                                        @else
-                                        <x-heroicon-s-chevron-down class='w-3 h-3'/>
+                                    @if ($sortBy == 'email' && $sortDir == 'asc')
+                                        <x-heroicon-s-chevron-up class="h-3 w-3" />
+                                    @else
+                                        <x-heroicon-s-chevron-down class="h-3 w-3" />
                                     @endif
                                 </a>
                             </th>
                             <th scope="col" class="bg-lime-100 px-6 py-2 font-medium">
-                                <a href="{{ route('users', [
-                                    'sortBy' => 'created_at',
-                                    'sortDir' => ($sortBy === 'created_at' && $sortDir === 'desc') ? 'asc' : 'desc'
-                                ]) }}" class="flex gap-2 items-center hover:underline-offset-2 hover:underline">
+                                <a
+                                    href="{{
+                                        route('users', [
+                                            'sortBy' => 'created_at',
+                                            'sortDir' => $sortBy === 'created_at' && $sortDir === 'desc' ? 'asc' : 'desc',
+                                        ])
+                                    }}"
+                                    class="flex items-center gap-2 hover:underline hover:underline-offset-2"
+                                >
                                     Created At
-                                    @if($sortBy == 'created_at' && $sortDir == 'asc')
-                                        <x-heroicon-s-chevron-up class='w-3 h-3'/>
-                                        @else
-                                        <x-heroicon-s-chevron-down class='w-3 h-3'/>
+                                    @if ($sortBy == 'created_at' && $sortDir == 'asc')
+                                        <x-heroicon-s-chevron-up class="h-3 w-3" />
+                                    @else
+                                        <x-heroicon-s-chevron-down class="h-3 w-3" />
                                     @endif
                                 </a>
                             </th>
@@ -105,7 +141,7 @@
                                 <td class="px-6 py-2">{{ $user->email }}</td>
                                 <td class="px-6 py-2">{{ $user->created_at->format('d M Y, H:i A') }}</td>
                                 @if (Auth::user()->role === 1)
-                                    <td class="px-6 py-2 uppercase">{{ $user->role === 1 ? "admin" : 'user' }}</td>
+                                    <td class="px-6 py-2 uppercase">{{ $user->role === 1 ? 'admin' : 'user' }}</td>
                                     <td class="px-6 py-2">
                                         <button
                                             @click="openEdit({
