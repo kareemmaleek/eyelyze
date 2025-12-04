@@ -18,7 +18,25 @@ class UserController extends Controller
     {
         if (Auth::check()) {
 
-            return view('dashboard.users', ['data' => User::latest()->paginate(15)]);
+
+            $query = User::query();
+
+            $sortBy     = $request->get('sortBy', 'id');
+            $sortDir    = $request->get('sortDir', 'desc');
+
+            if (!in_array($sortBy, ['id', 'name', 'email', 'created_at', 'role'])) {
+                $sortBy = 'id';
+            }
+
+            if (!in_array($sortDir, ['asc', 'desc'])) {
+                $sortDir = 'desc';
+            }
+
+            $query->orderBy($sortBy, $sortDir);
+
+            $users = $query->paginate(10)->withQueryString();
+
+            return view('dashboard.users', compact('users', 'sortBy', 'sortDir'));
         } else {
             return redirect()->route('access.layout');
         }
@@ -33,7 +51,8 @@ class UserController extends Controller
         }
     }
 
-    public function createUser(Request $req, AuditController $log){
+    public function createUser(Request $req, AuditController $log)
+    {
 
 
         if (!Auth::check()) {
@@ -41,7 +60,7 @@ class UserController extends Controller
         }
 
         $roleRule = Auth::user()->role === 1 ? 'required|integer|in:0,1' : '';
-        
+
         $validate = $req->validate([
             'fullname' => 'required|string|max:50',
             'email' => 'required|unique:users,email',
@@ -50,30 +69,29 @@ class UserController extends Controller
             'password_confirmation' => 'required',
             'role' => $roleRule
         ]);
-            
-
-           User::create([
-                'uid' => Uuid::uuid4()->getHex(),
-                'name' => $req->fullname,
-                'email' => $req->email,
-                'username' => $req->username,
-                'password' => Hash::make($req->password),
-                'role' => Auth::user()->role === 1 ? (int) $req->input('role') : 0,
-                'status' => 1,
-                'email_verified_at' => now(),
-           ]);
 
 
-           $log->createLog('created user with email ' . $req->email, $req->path(), $req->method(), $req->ip());
+        User::create([
+            'uid' => Uuid::uuid4()->getHex(),
+            'name' => $req->fullname,
+            'email' => $req->email,
+            'username' => $req->username,
+            'password' => Hash::make($req->password),
+            'role' => Auth::user()->role === 1 ? (int) $req->input('role') : 0,
+            'status' => 1,
+            'email_verified_at' => now(),
+        ]);
 
-           return redirect()->route('users')
-        ->with('success', 'Created new user successfully!');
 
-        
+        $log->createLog('created user with email ' . $req->email, $req->path(), $req->method(), $req->ip());
+
+        return redirect()->route('users')
+            ->with('success', 'Created new user successfully!');
     }
 
-    public function updateUser(Request $req, $uid, AuditController $log){
-        if(!Auth::check()){
+    public function updateUser(Request $req, $uid, AuditController $log)
+    {
+        if (!Auth::check()) {
             return view('access.layout');
         }
 
@@ -88,32 +106,31 @@ class UserController extends Controller
             'role' => 'nullable|integer',
         ]);
 
-        if($req->filled('fullname')){
+        if ($req->filled('fullname')) {
             $user->name = $req->fullname;
         }
 
-        if($req->filled('email')){
+        if ($req->filled('email')) {
             $user->email = $req->email;
         }
 
-        if($req->filled('username')){
+        if ($req->filled('username')) {
             $user->username = $req->username;
         }
 
-        if($req->filled('password')){
+        if ($req->filled('password')) {
             $user->password = Hash::make($req->password);
         }
 
-        if($req->filled('role') && Auth::user()->role === 1){
+        if ($req->filled('role') && Auth::user()->role === 1) {
             $user->role = $req->role;
         }
 
-        
+
         $user->save();
         $log->createLog('edited user with email ' . $user->email, $req->path(), $req->method(), $req->ip());
 
         return redirect()->route('users')->with('success', 'Update user data successfully!');
-
     }
 
     public function proceedLogin(Request $request)

@@ -22,10 +22,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
 
 
-        AuditLogs::factory(4)->recycle(User::factory(5)->create([
+        AuditLogs::factory(4)->recycle(User::factory(200)->create([
             'role' => 0,
         ]))->create();
-
-        
     }
 }
