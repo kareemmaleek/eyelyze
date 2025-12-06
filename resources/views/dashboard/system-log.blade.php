@@ -17,6 +17,7 @@
                             <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Route</th>
                             <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Method</th>
                             <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Created At</th>
+                            
                         </tr>
                     </thead>
 
@@ -35,6 +36,7 @@
                                 <td class="px-6 py-2 whitespace-nowrap">
                                     {{ $log->created_at->format('d M Y, H:i A') }}
                                 </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>

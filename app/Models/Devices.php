@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Devices extends Model
 {
@@ -20,4 +22,9 @@ class Devices extends Model
         'status',
         'device_owner'
     ];
+
+    public function userRelation(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'device_owner');
+    }
 }
