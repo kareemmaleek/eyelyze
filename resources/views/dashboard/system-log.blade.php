@@ -7,36 +7,34 @@
         </div>
 
         <div class="flex w-full flex-1 flex-col rounded-lg bg-white p-5">
-            <div class="relative mb-3 max-w-[900px] min-w-full flex-1 overflow-x-auto rounded-lg border">
+            <div class="relative mb-3 min-w-full max-w-[700px] flex-1 overflow-x-auto rounded-lg border">
                 <table class="table-auto text-left text-sm">
                     <thead class="text-body sticky top-0 z-10 border-b bg-lime-100 text-sm">
                         <tr>
                             <th class="bg-lime-100 px-6 py-2 font-medium">User Email</th>
-                            <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">IP Address</th>
-                            <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Description</th>
-                            <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Route</th>
-                            <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Method</th>
-                            <th class="bg-lime-100 px-6 py-2 font-medium whitespace-nowrap">Created At</th>
-                            
+                            <th class="whitespace-nowrap bg-lime-100 px-6 py-2 font-medium">IP Address</th>
+                            <th class="whitespace-nowrap bg-lime-100 px-6 py-2 font-medium">Description</th>
+                            <th class="whitespace-nowrap bg-lime-100 px-6 py-2 font-medium">Route</th>
+                            <th class="whitespace-nowrap bg-lime-100 px-6 py-2 font-medium">Method</th>
+                            <th class="whitespace-nowrap bg-lime-100 px-6 py-2 font-medium">Created At</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach ($data as $log)
                             <tr class="border-b bg-white hover:bg-gray-100">
-                                <th class="px-6 py-2 whitespace-nowrap">
+                                <th class="whitespace-nowrap px-6 py-2">
                                     {{ $log->userRelation->email }}
                                 </th>
-                                <td class="px-6 py-2 whitespace-nowrap">{{ $log->ip_address }}</td>
-                                <td class="px-6 py-2 whitespace-nowrap">
+                                <td class="whitespace-nowrap px-6 py-2">{{ $log->ip_address }}</td>
+                                <td class="whitespace-nowrap px-6 py-2">
                                     {{ $log->description }}
                                 </td>
-                                <td class="px-6 py-2 whitespace-nowrap">{{ $log->route }}</td>
-                                <td class="px-6 py-2 whitespace-nowrap uppercase">{{ $log->method }}</td>
-                                <td class="px-6 py-2 whitespace-nowrap">
+                                <td class="whitespace-nowrap px-6 py-2">{{ $log->route }}</td>
+                                <td class="whitespace-nowrap px-6 py-2 uppercase">{{ $log->method }}</td>
+                                <td class="whitespace-nowrap px-6 py-2">
                                     {{ $log->created_at->format('d M Y, H:i A') }}
                                 </td>
-                                
                             </tr>
                         @endforeach
                     </tbody>

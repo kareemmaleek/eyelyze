@@ -6,10 +6,8 @@
             </div>
 
             <div class="w-fit">
-                <button
-                    @click="openCreate()"
-                    class="flex w-fit cursor-pointer items-center gap-1 rounded-md bg-[var(--mainColor)] p-2 px-5 text-sm transition ease-in hover:opacity-90"
-                >
+                <button @click="openCreate()"
+                    class="flex w-fit cursor-pointer items-center gap-1 rounded-md bg-[var(--mainColor)] p-2 px-5 text-sm transition ease-in hover:opacity-90">
                     <x-heroicon-o-device-tablet class="h-4 w-4" />
                     Add Device
                 </button>
@@ -31,10 +29,9 @@
                     </thead>
                     <tbody>
                         @foreach ($devices as $device)
-
                             <tr class="border-b bg-white hover:bg-gray-100">
                                 <td class="px-6 py-2">
-                                    <div class="hover:underline font-medium cursor-pointer">
+                                    <div class="cursor-pointer font-medium hover:underline">
                                         {{ $device->device_model }}
                                     </div>
                                 </td>
@@ -42,30 +39,31 @@
                                 <td class="px-6 py-2">{{ $device->userRelation->email }}</td>
                                 <td class="px-6 py-2">
 
-                                    <div class="w-fit p-1 px-2 rounded-lg {{ $device->status === 1 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }} flex gap-1 items-center text-sm font-medium">
-                                        
-                                        
-                                        <div class="relative w-2 h-2">
-                                            <div class="w-2 h-2 rounded-full {{ $device->status === 1 ? 'bg-emerald-400' : 'bg-rose-400' }}"></div>
-                                            <div class="absolute top-0 left-0 w-2 h-2 rounded-full {{ $device->status === 1 ? 'bg-emerald-400' : 'bg-rose-400' }} animate-ping"></div>
+                                    <div
+                                        class="{{ $device->status === 1 ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700' }} flex w-fit items-center gap-1 rounded-full p-1 px-3 text-sm font-medium">
+
+                                        <div class="relative h-2 w-2">
+                                            <div
+                                                class="{{ $device->status === 1 ? 'bg-emerald-400' : 'bg-rose-400' }} h-2 w-2 rounded-full">
+                                            </div>
+                                            <div
+                                                class="{{ $device->status === 1 ? 'bg-emerald-400' : 'bg-rose-400' }} absolute left-0 top-0 h-2 w-2 animate-ping rounded-full">
+                                            </div>
                                         </div>
-                                        <span>{{ $device->status === 1 ? 'Active' : 'Inactive' }}</span>
-                                       
+                                        <span>{{ $device->status === 1 ? 'Connected' : 'Disconnected' }}</span>
+
                                     </div>
                                 </td>
                                 <td class="px-6 py-2">{{ $device->created_at->format('d M Y, H:i A') }}</td>
                                 <td class="px-6 py-2">
-                                        <button
-                                            
-                                            class="cursor-pointer rounded-md bg-[var(--mainColor)] px-3 py-2 text-xs hover:opacity-90"
-                                        >
-                                            Edit
-                                        </button>
-                                    </td>
+                                    <button
+                                        class="cursor-pointer rounded-md bg-[var(--mainColor)] px-3 py-2 text-xs hover:opacity-90">
+                                        Edit
+                                    </button>
+                                </td>
                             </tr>
-                            
                         @endforeach
-                        
+
                     </tbody>
                 </table>
             </div>
